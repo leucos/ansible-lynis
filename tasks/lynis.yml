@@ -7,6 +7,8 @@
 - name: Adds lynis customer repos
   apt_repository:
     repo: "deb https://packages.cisofy.com/customers/{{ lynis_licence_key }}/lynis/deb/ {{ ansible_distribution_release }} main"
+    filename: packages_cisofy_com_customers
+    mode: 0640
     update_cache: yes
   when: lynis_licence_key is defined
 
@@ -14,8 +16,6 @@
 - name: Adds lynis community repos
   apt_repository:
     repo: "deb https://packages.cisofy.com/community/lynis/deb/ {{ ansible_distribution_release }} main"
-    filename: packages_cisofy_com_customers
-    mode: 0640
     update_cache: yes
   when: lynis_licence_key is not defined
 
