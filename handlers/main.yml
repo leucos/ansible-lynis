@@ -1,3 +1,4 @@
 - name: Run lynis
   command: lynis audit system --quick --upload
+  when: lynis_licence_key is defined
 

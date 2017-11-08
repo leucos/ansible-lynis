@@ -37,6 +37,8 @@
     mode: 0600
     owner: root
     group: root
+  notify:
+    - Run lynis
 
 - name: Adds lynis cron entry
   cron:
