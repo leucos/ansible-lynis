@@ -1,0 +1,3 @@
+- name: Run lynis
+  command: lynis audit system --quick --upload
+

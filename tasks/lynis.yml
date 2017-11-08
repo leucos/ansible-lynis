@@ -27,6 +27,8 @@
     pkg: lynis-plugins
     state: latest
   when: lynis_licence_key is defined
+  notify:
+    - Run lynis
 
 - name: Adds custom.prf
   template:
