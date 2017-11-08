@@ -1,0 +1,12 @@
+{% if lynix_licence_key is defined %}
+license-key={{ lynix_licence_key }}
+upload-server=portal.cisofy.com
+{% endif %}
+
+system-customer-name={{ lynis_system_customer_name | default("default") }}
+tags={{ lynis_tags | join(',') }}
+
+{% for test in lynis_skip_tests %}
+skip-test={{ test }}
+{% endfor %}
+

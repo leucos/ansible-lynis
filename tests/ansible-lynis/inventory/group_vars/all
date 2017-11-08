@@ -1,0 +1,11 @@
+lynis_skip_tests:
+  - HTTP-1234
+  - FILE-1234
+  - FIRE-1234
+
+lynis_system_customer_name: foobar
+
+lynis_tags:
+  - fizz
+  - buzz
+

@@ -1,0 +1,44 @@
+- name: Adds lynis key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: C80E383C3DE9F082E01391A0366C67DE91CA5D5F
+    state: present
+
+- name: Adds lynis customer repos
+  apt_repository:
+    repo: "deb https://packages.cisofy.com/customers/{{ lynis_licence_key }}/lynis/deb/ {{ ansible_distribution_release }} main"
+    update_cache: yes
+  when: lynis_licence_key is defined
+
+
+- name: Adds lynis community repos
+  apt_repository:
+    repo: "deb https://packages.cisofy.com/community/lynis/deb/ {{ ansible_distribution_release }} main"
+    update_cache: yes
+  when: lynis_licence_key is not defined
+
+- name: Installs lynis
+  apt:
+    pkg: lynis
+    state: latest
+
+- name: Installs lynis plugins
+  apt:
+    pkg: lynis-plugins
+    state: latest
+  when: lynis_licence_key is defined
+
+- name: Adds custom.prf
+  template:
+    src: custom.prf.j2
+    dest: /etc/lynis/custom.prf
+    mode: 0600
+    owner: root
+    group: root
+
+- name: Adds lynis cron entry
+  cron:
+    job: lynis audit system --quick --upload
+    special_time: daily
+  when: lynis_cron and lynis_licence_key is defined
+
