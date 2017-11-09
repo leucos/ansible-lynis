@@ -45,7 +45,7 @@
 - name: Adds lynis cron entry
   cron:
     name: lynis run
-    job: lynis audit system --quick --upload
+    job: /usr/sbin/lynis audit system --quick --upload
     special_time: daily
   when: lynis_cron and lynis_licence_key is defined
 
