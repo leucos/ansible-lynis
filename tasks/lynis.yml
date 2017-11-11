@@ -45,7 +45,7 @@
 - name: Adds lynis cron entry
   cron:
     name: lynis run
-    job: /usr/sbin/lynis audit system --upload --cronjob --auditor "Automated audit" > /var/log/lynis_audit.log 2>&1
+    job: /usr/sbin/lynis audit system --upload --cronjob --auditor "Ansible generated automated audit" > /var/log/lynis_audit.log 2>&1
     special_time: daily
   when: lynis_cron and lynis_licence_key is defined
 
